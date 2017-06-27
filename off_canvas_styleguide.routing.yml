@@ -1,0 +1,8 @@
+off_canvas_styleguide.links:
+  path: '/off_canvas_styleguide-links'
+  defaults:
+    _controller: '\Drupal\off_canvas_styleguide\Controller\LinksController::linksDisplay'
+  requirements:
+    _permission: 'view style guides'
+  options:
+    _admin_route: FALSE

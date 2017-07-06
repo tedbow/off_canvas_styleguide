@@ -33,6 +33,37 @@ class LinksController {
         ],
       ],
 
+      'off_canvas_shortcuts' => [
+        '#title' => 'Off-canvas shortcut form(has dropbutton)',
+        '#type' => 'link',
+        '#url' => Url::fromRoute('entity.shortcut_set.customize_form', ['shortcut_set' => 'default']),
+        '#attributes' => [
+          'class' => ['use-ajax'],
+          'data-dialog-type' => 'dialog',
+          'data-dialog-renderer' => 'off_canvas',
+        ],
+        '#attached' => [
+          'library' => [
+            'outside_in/drupal.outside_in',
+          ],
+        ],
+      ],
+      'off_canvas_menu' => [
+        '#title' => 'Off-canvas menu form(has dropbutton)',
+        '#type' => 'link',
+        '#url' => Url::fromRoute('entity.menu.collection'),
+        '#attributes' => [
+          'class' => ['use-ajax'],
+          'data-dialog-type' => 'dialog',
+          'data-dialog-renderer' => 'off_canvas',
+        ],
+        '#attached' => [
+          'library' => [
+            'outside_in/drupal.outside_in',
+          ],
+        ],
+      ],
+
     ];
   }
 }

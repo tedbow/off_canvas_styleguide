@@ -16,52 +16,61 @@ class LinksController {
    *   Render array with links.
    */
   public function linksDisplay() {
-    return [
-     '#theme' => 'links',
-      '#links' => [
-        'off_canvas_link_1' => [
-          'title' => 'Off-canvas styles',
+    $attributes_options['off_canvas'] = [
+      'data-dialog-type' => 'dialog',
+      'data-dialog-renderer' => 'off_canvas',
+    ];
+    $attributes_options['modal'] = [
+      'data-dialog-type' => 'modal',
+    ];
+    $attributes_options['dialog'] = [
+      'data-dialog-type' => 'dialog',
+    ];
+    $links = [];
+    foreach ($attributes_options as $key => $attributes_option) {
+      $links += [
+        "{$key}_link_1" => [
+          'title' => "$key styles",
 
           'url' => Url::fromRoute('styleguide.page'),
           'attributes' => [
             'class' => ['use-ajax'],
-            'data-dialog-type' => 'dialog',
-            'data-dialog-renderer' => 'off_canvas',
-          ],
+          ] + $attributes_option,
 
         ],
 
-        'off_canvas_shortcuts' => [
-          'title' => 'Off-canvas shortcut form(has dropbutton)',
+        "{$key}_link_shortcuts" => [
+          'title' => "$key shortcut form(has dropbutton)",
           'type' => 'link',
           'url' => Url::fromRoute('entity.shortcut_set.customize_form', ['shortcut_set' => 'default']),
           'attributes' => [
-            'class' => ['use-ajax'],
-            'data-dialog-type' => 'dialog',
-            'data-dialog-renderer' => 'off_canvas',
-          ],
+              'class' => ['use-ajax'],
+            ] + $attributes_option,
           'attached' => [
             'library' => [
               'outside_in/drupal.outside_in',
             ],
           ],
         ],
-        'off_canvas_menu' => [
-          'title' => 'Off-canvas menu form(has dropbutton)',
+        "{$key}_link_menu" => [
+          'title' => "$key  menu form(has dropbutton)",
           'type' => 'link',
           'url' => Url::fromRoute('entity.menu.collection'),
           'attributes' => [
-            'class' => ['use-ajax'],
-            'data-dialog-type' => 'dialog',
-            'data-dialog-renderer' => 'off_canvas',
-          ],
+              'class' => ['use-ajax'],
+            ] + $attributes_option,
           'attached' => [
             'library' => [
               'outside_in/drupal.outside_in',
             ],
           ],
         ],
-      ],
+      ];
+    }
+
+    return [
+     '#theme' => 'links',
+      '#links' => $links,
       '#attached' => [
         'library' => [
           'outside_in/drupal.outside_in',
